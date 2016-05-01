@@ -31,6 +31,33 @@
  */
 const bool DEBUG = true;
 
+
+
+/**
+ * LED controller configuration.
+ */
+
+/**
+ * Defines the minimum brightness of a pulse.
+ */
+const uint8_t LEDCONTROLLER_PULSE_BRIGHTNESS_MIN = 30;
+
+/**
+ * Defines the maximum brightness of a pulse.
+ */
+const uint8_t LEDCONTROLLER_PULSE_BRIGHTNESS_MAX = 80;
+
+/**
+ * Defines the pulse duration.
+ */
+const int LEDCONTROLLER_PULSE_DURATION = 750;
+
+
+
+/**
+ * Connection configuration.
+ */
+
 /**
  * Define whether the serial USB connection is enabled.
  */
