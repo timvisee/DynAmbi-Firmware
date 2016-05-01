@@ -24,3 +24,8 @@
 
 // Initializations
 Led LedManager::statusLed = Led(Led::STATUS_LED_PIN, Led::STATUS_LED_ANALOG);
+
+void LedManager::update() {
+    // Update the status LED
+    LedManager::statusLed.update();
+}

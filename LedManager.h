@@ -35,6 +35,11 @@ public:
      * Status LED instance.
      */
     static Led statusLed;
+
+    /**
+     * Update all managed LEDs.
+     */
+    static void update();
 };
 
 #endif //DYNAMBI_LEDMANAGER_H

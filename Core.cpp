@@ -53,9 +53,8 @@ void Core::loop() {
 }
 
 void Core::updateLogic() {
-    // Update the and status LEDs
-    // TODO: Use utility update function in led manager class for this
-    LedManager::statusLed.update();
+    // Update the LED manager
+    LedManager::update();
 }
 
 /**
