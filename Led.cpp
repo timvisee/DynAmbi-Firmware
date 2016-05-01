@@ -77,8 +77,15 @@ void Led::setFadeDuration(int fadeDuration) {
 
 void Led::update() {
     // Make sure the LED is analog
-    if(!this->inAnalogMode())
+    if(!this->inAnalogMode()) {
+        // Handle pulsing for non-analog LEDs
+        if(this->isPulsing())
+            // Determine and set the LED state
+            this->setState(millis() % this->pulseDuration < this->pulseDuration / 2.0);
+
+        // We're done, return
         return;
+    }
 
     // Get the time delta
     unsigned long timeDelta = (unsigned long) (this->toTime - this->fromTime);
@@ -125,12 +132,11 @@ void Led::setState(bool state) {
     // Set the state
     this->state = state;
 
-    // Update the led
-    if(!this->inAnalogMode())
-        digitalWrite(this->pin, state ? HIGH : LOW);
-
-    else
+    // Update the LED
+    if(this->inAnalogMode())
         this->fade(state ? BRIGHTNESS_HIGH : BRIGHTNESS_LOW);
+    else
+        digitalWrite(this->pin, state ? HIGH : LOW);
 }
 
 void Led::fade(uint8_t brightness) {
@@ -164,7 +170,10 @@ void Led::setBrightness(uint8_t brightness) {
     this->brightness = brightness;
 
     // Set the actual brightness
-    analogWrite(this->pin, brightness);
+    if(this->inAnalogMode())
+        analogWrite(this->pin, brightness);
+    else
+        digitalWrite(this->pin, brightness >= 256 / 2 ? HIGH : LOW);
 }
 
 uint8_t Led::getToBrightness() {
@@ -179,20 +188,30 @@ bool Led::isPulsing() {
 }
 
 void Led::setPulsing(bool pulsing) {
-    // Properly fade into pulsing mode
-    if(!this->pulsing && pulsing) {
-        // Determine the remaining pulse time
-        int pulseTimeRemaining = (int) (this->pulseDuration - (millis() % this->pulseDuration));
-
-        // Fade to the nearest pulse brightness bound
-        if(pulseTimeRemaining < this->pulseDuration / 2)
-            this->fade(this->pulseMin, pulseTimeRemaining);
-        else
-            this->fade(this->pulseMax, pulseTimeRemaining - (this->pulseDuration / 2));
-    }
+    // Determine whether the pulsing state changed
+    const bool changed = this->pulsing != pulsing;
 
     // Set the pulsing flag
     this->pulsing = pulsing;
+
+    // Properly fade into pulsing mode
+    if(changed && pulsing) {
+
+        // Fade the LED to it's pulse state if it's in analog mode
+        if(this->inAnalogMode()) {
+            // Determine the remaining pulse time
+            int pulseTimeRemaining = (int) (this->pulseDuration - (millis() % this->pulseDuration));
+
+            // Fade to the nearest pulse brightness bound
+            if(pulseTimeRemaining < this->pulseDuration / 2)
+                this->fade(this->pulseMin, pulseTimeRemaining);
+            else
+                this->fade(this->pulseMax, pulseTimeRemaining - (this->pulseDuration / 2));
+        }
+
+        // Force-update
+        this->update();
+    }
 }
 
 uint8_t Led::getPulseMinimum() {
