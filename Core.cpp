@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) ArduinoDynambi 2016. All rights reserved.                    *
+ * Copyright (c) ArduinoDynAmbi 2016. All rights reserved.                    *
  *                                                                            *
  * @author Tim Visee                                                          *
  * @website http://timvisee.com/                                              *
@@ -27,10 +27,6 @@
 Core::Core() {
     // Field initialization
     this->started = false;
-
-    // Set up the status LEDs
-    // TODO: Isn't this already done in the manager class itself?
-    LedManager::statusLed = Led(Led::STATUS_LED_PIN, Led::STATUS_LED_ANALOG);
 }
 
 void Core::setup() {
@@ -42,6 +38,9 @@ void Core::setup() {
 
     // Set up the status LED
     LedManager::statusLed.setupPin();
+
+    // Enable pulsing for the status LED
+    LedManager::statusLed.setPulsing(true);
 
     // The device has been started, update the flag
     this->started = true;
