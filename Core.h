@@ -20,26 +20,49 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.                *
  ******************************************************************************/
 
+#ifndef DYNAMBI_CORE_H
+#define DYNAMBI_CORE_H
+
 #include <Arduino.h>
-#include "Core.h"
+#include "Globals.h"
+#include "Led.h"
+#include "LedManager.h"
 
 /**
- * Core instance. For all basic logic.
+ * Core class.
  */
-Core core;
+class Core {
+private:
+    /**
+     * Flag whether the device has been fully started or not.
+     */
+    bool started;
 
-/**
- * Called one on set up.
- */
-void setup() {
-    // Route the setup call to the core class
-    core.setup();
-}
+public:
+    /**
+     * Constructor.
+     */
+    Core();
 
-/**
- * Called each loop.
- */
-void loop() {
-    // Route the loop call to the core class
-    core.loop();
-}
+    /**
+     * Called once on set up.
+     */
+    void setup();
+
+    /**
+     * Called each loop.
+     */
+    void loop();
+
+    /**
+     * Method used to update all internal logic.
+     */
+    void updateLogic();
+
+    /**
+     * A smart delay method, to efficiently execute the update call while waiting.
+     */
+    void smartDelay(int delay);
+};
+
+#endif //DYNAMBI_CORE_H

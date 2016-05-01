@@ -20,26 +20,58 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.                *
  ******************************************************************************/
 
-#include <Arduino.h>
 #include "Core.h"
+#include "Random.h"
+#include "Timer.h"
 
-/**
- * Core instance. For all basic logic.
- */
-Core core;
+Core::Core() {
+    // Field initialization
+    this->started = false;
 
-/**
- * Called one on set up.
- */
-void setup() {
-    // Route the setup call to the core class
-    core.setup();
+    // Set up the status LEDs
+    // TODO: Isn't this already done in the manager class itself?
+    LedManager::statusLed = Led(Led::STATUS_LED_PIN, Led::STATUS_LED_ANALOG);
+}
+
+void Core::setup() {
+    // Initial startup delay
+    delay(200);
+
+    // Randomize the random seed
+    Random::randomize();
+
+    // Set up the status LED
+    LedManager::statusLed.setupPin();
+
+    // The device has been started, update the flag
+    this->started = true;
+}
+
+void Core::loop() {
+    // Update everything
+    updateLogic();
+}
+
+void Core::updateLogic() {
+    // Update the and status LEDs
+    // TODO: Use utility update function in led manager class for this
+    LedManager::statusLed.update();
 }
 
 /**
- * Called each loop.
+ * A smart delay method.
+ * This method is similar to Arduino's delay method, but it keeps calling the update() method while the delay method is executed instead of freezing the Arduino.
+ *
+ * @param delay The delay in milliseconds to wait.
  */
-void loop() {
-    // Route the loop call to the core class
-    core.loop();
+void Core::smartDelay(int delay) {
+    // Create a timer, to track the passed time
+    Timer timer(delay);
+
+    // Start the timer
+    timer.start();
+
+    // Call the update method until the timer has passed the specified delay
+    while(!timer.isFinished())
+        updateLogic();
 }
