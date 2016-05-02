@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) ArduinoDynAmbi 2016. All rights reserved.                    *
+ * Copyright (c) DynAmbi-Firmware 2016. All rights reserved.                  *
  *                                                                            *
  * @author Tim Visee                                                          *
  * @website http://timvisee.com/                                              *
