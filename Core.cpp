@@ -23,13 +23,11 @@
 #include "Core.h"
 #include "Random.h"
 #include "Timer.h"
-#include "StripController.h"
-
-StripController c = StripController();
 
 Core::Core() {
     // Field initialization
     this->started = false;
+    this->strip = StripController();
 }
 
 void Core::setup() {
@@ -53,7 +51,7 @@ void Core::setup() {
     LedManager::statusLed.setPulsing(true);
 
     // Initialize the LED strip
-    c.init();
+    this->strip.init();
 
     // The device has been started, update the flag
     this->started = true;
@@ -71,7 +69,7 @@ void Core::loop() {
         return;
 
     // Stream the strip data
-    c.stream();
+    this->strip.stream();
 
     // End
     // TODO: Replace this with proper packet handling

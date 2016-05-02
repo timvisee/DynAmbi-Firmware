@@ -27,6 +27,7 @@
 #include "Globals.h"
 #include "Led.h"
 #include "LedManager.h"
+#include "StripController.h"
 
 /**
  * Core class.
@@ -37,6 +38,11 @@ private:
      * Flag whether the device has been fully started or not.
      */
     bool started;
+
+    /**
+     * LED strip controller instance.
+     */
+    StripController strip;
 
 public:
     /**
