@@ -38,6 +38,16 @@ const bool DEBUG = true;
  */
 
 /**
+ * Data pin for the LED strip.
+ */
+const uint8_t LED_STRIP_PIN_DATA = 2;
+
+/**
+ * Clock pin for the LED strip.
+ */
+const uint8_t LED_STRIP_PIN_CLOCK = 3;
+
+/**
  * Number of LEDs on the strip.
  */
 const uint8_t LED_STRIP_LED_COUNT = 62;
