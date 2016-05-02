@@ -87,11 +87,11 @@ const int LEDCONTROLLER_PULSE_DURATION = 750;
 /**
  * Define whether the serial USB connection is enabled.
  */
-const int SERIAL_USB_ENABLED = true;
+const bool SERIAL_USB_ENABLED = true;
 
 /**
  * The USB serial baud rate.
  */
-const int SERIAL_USB_BAUD = 115200;
+const unsigned long SERIAL_USB_BAUD = 115200;
 
 #endif //DYNAMBI_GLOBALS_H
