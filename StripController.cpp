@@ -29,12 +29,43 @@ void StripController::init() {
     // Begin the strip
     this->strip.begin();
 
+    // Clear the LED strip
+    this->clear();
+
     // Render the strip
     this->render();
+
+    // Play the initialization animation
+    animationInit();
 }
 
 LPD8806 StripController::getStrip() {
     return this->strip;
+}
+
+void StripController::clear() {
+    // Loop through each LED, and clear it
+    for(uint8_t i = 0; i < LED_STRIP_LED_COUNT; i++)
+        this->strip.setPixelColor(i, 0);
+}
+
+void StripController::animationInit() {
+    // Loop through each LED and render an animation
+    for(uint8_t i = 0; i < LED_STRIP_LED_COUNT; i++) {
+        // Light up the current LED
+        strip.setPixelColor(i, strip.Color(127, 127, 127));
+
+        // Clear the previous LED
+        if(i > 0)
+            this->strip.setPixelColor(i - 1, 0);
+
+        // Render the strip
+        this->render();
+    }
+
+    // Clear and render the strip
+    this->clear();
+    this->render();
 }
 
 bool StripController::stream() {

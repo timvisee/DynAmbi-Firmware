@@ -47,6 +47,16 @@ public:
     LPD8806 getStrip();
 
     /**
+     * Clear the LED strip buffer, setting all LEDs to black.
+     */
+    void clear();
+
+    /**
+     * Play the initialization animation.
+     */
+    void animationInit();
+
+    /**
      * Stream the LED colors from the Serial bus to the LED strip.
      * The LED strip will automatically render once it's finished streaming data.
      *
