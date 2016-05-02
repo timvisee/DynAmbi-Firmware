@@ -60,7 +60,10 @@ public:
     void updateLogic();
 
     /**
-     * A smart delay method, to efficiently execute the update call while waiting.
+     * A smart delay method.
+     * This method is similar to Arduino's delay method, but it keeps calling the update() method while the delay method is executed instead of freezing the Arduino.
+     *
+     * @param delay The delay in milliseconds to wait.
      */
     void smartDelay(int delay);
 };

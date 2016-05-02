@@ -23,6 +23,9 @@
 #include "Core.h"
 #include "Random.h"
 #include "Timer.h"
+#include "StripController.h"
+
+StripController c = StripController();
 
 Core::Core() {
     // Field initialization
@@ -33,6 +36,13 @@ void Core::setup() {
     // Initial startup delay
     delay(200);
 
+    // Enable the serial connection
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCSimplifyInspection"
+    if(SERIAL_USB_ENABLED)
+        Serial.begin(SERIAL_USB_BAUD);
+#pragma clang diagnostic pop
+
     // Randomize the random seed
     Random::randomize();
 
@@ -42,11 +52,31 @@ void Core::setup() {
     // Enable pulsing for the status LED
     LedManager::statusLed.setPulsing(true);
 
+    // Initialize the LED strip
+    c.init();
+
     // The device has been started, update the flag
     this->started = true;
+
+    // Start the data stream
+    // TODO: Replace this with proper handshaking!
+    Serial.print("ozy");
 }
 
 void Core::loop() {
+    // Wait for the begin bytes
+    // TODO: Replace this with proper handshaking!
+    while(Serial.read() != 'o');
+    if(Serial.read() != 'z')
+        return;
+
+    // Stream the strip data
+    c.stream();
+
+    // End
+    // TODO: Replace this with proper packet handling
+    Serial.write('y');
+
     // Update everything
     updateLogic();
 }
@@ -56,12 +86,6 @@ void Core::updateLogic() {
     LedManager::update();
 }
 
-/**
- * A smart delay method.
- * This method is similar to Arduino's delay method, but it keeps calling the update() method while the delay method is executed instead of freezing the Arduino.
- *
- * @param delay The delay in milliseconds to wait.
- */
 void Core::smartDelay(int delay) {
     // Create a timer, to track the passed time
     Timer timer(delay);
