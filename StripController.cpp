@@ -22,8 +22,6 @@
 
 #include "StripController.h"
 
-#include "SwiftBoltProtocol.h"
-
 void StripController::init() {
     // Initialize the LED strip
     this->strip = LPD8806(LED_STRIP_LED_COUNT, LED_STRIP_PIN_DATA, LED_STRIP_PIN_CLOCK);

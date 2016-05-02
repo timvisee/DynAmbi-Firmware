@@ -27,6 +27,7 @@
 #include "LPD8806.h"
 #include "SPI.h"
 #include "Globals.h"
+#include "SwiftBoltProtocol.h"
 
 class StripController {
 public:
