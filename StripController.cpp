@@ -72,12 +72,11 @@ bool StripController::stream() {
     // Loop through all LEDs
     for(uint8_t ledIndex = 0; ledIndex < LED_STRIP_LED_COUNT; ledIndex++) {
         // Create an array to read the color data into
-        uint8_t * colors = new uint8_t[LED_STRIP_CHANNEL_COUNT];
+        uint8_t colors[LED_STRIP_CHANNEL_COUNT];
 
         // Read the color data
         for(uint8_t i = 0; i < LED_STRIP_CHANNEL_COUNT; i++) {
             // Read the current color byte
-            // TODO: Add timeout
             colors[i] = (uint8_t) Serial.read();
 
             // Stop if we're hitting a stream stop byte
