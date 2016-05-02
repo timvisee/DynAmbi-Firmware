@@ -50,7 +50,8 @@ public:
      * Stream the LED colors from the Serial bus to the LED strip.
      * The LED strip will automatically render once it's finished streaming data.
      *
-     * @return True on success, false on failure.
+     * @return True if the strip has been fully rendered successfully.
+     * False if the stream was stopped early, or if an error occurred.
      */
     bool stream();
 

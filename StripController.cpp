@@ -48,7 +48,14 @@ bool StripController::stream() {
             // Read the current color byte
             colors[i] = (uint8_t) Serial.read();
 
-            // TODO: Check for stop or other control bytes
+            // Stop if we're hitting a stream stop byte
+            if(colors[i] == SwiftBoltProtocol::BYTE_STREAM_STOP) {
+                // Render the current state of the strip
+                this->render();
+
+                // Return
+                return false;
+            }
         }
 
         // TODO: We should do this dynamically with the given number of color channels
