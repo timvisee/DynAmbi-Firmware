@@ -27,7 +27,7 @@
 
 class SwiftBoltProtocol {
 public:
-    const static uint8_t STREAM_STOP_BYTE = 130;
+    const static uint8_t BYTE_STREAM_STOP = 130;
 };
 
 #endif //DYNAMBI_SWIFTBOLTPROTOCOL_H

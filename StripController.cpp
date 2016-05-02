@@ -25,6 +25,12 @@
 void StripController::init() {
     // Initialize the LED strip
     this->strip = LPD8806(LED_STRIP_LED_COUNT, LED_STRIP_PIN_DATA, LED_STRIP_PIN_CLOCK);
+
+    // Begin the strip
+    this->strip.begin();
+
+    // Render the strip
+    this->render();
 }
 
 LPD8806 StripController::getStrip() {
@@ -62,7 +68,7 @@ bool StripController::stream() {
 
     // Read data until we've reached the stop bit for the stream
     // TODO: Add timeout
-    while(((uint8_t) Serial.read()) != SwiftBoltProtocol::STREAM_STOP_BYTE);
+    while(((uint8_t) Serial.read()) != SwiftBoltProtocol::BYTE_STREAM_STOP);
 
     // Return
     return true;
