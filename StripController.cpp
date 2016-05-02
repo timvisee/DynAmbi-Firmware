@@ -85,6 +85,10 @@ bool StripController::stream() {
 
             // Stop if we're hitting a stream stop byte
             if(colors[i] == SwiftBoltProtocol::BYTE_STREAM_STOP) {
+                // Clear the rest of the pixels
+                for(uint8_t remaining = ledIndex; remaining < LED_STRIP_LED_COUNT; remaining++)
+                    this->strip.setPixelColor(remaining, 0);
+
                 // Render the current state of the strip
                 this->render();
 
