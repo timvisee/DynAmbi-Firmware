@@ -66,6 +66,6 @@ const int SERIAL_USB_ENABLED = true;
 /**
  * The USB serial baud rate.
  */
-const int SERIAL_USB_BAUD = 19200;
+const int SERIAL_USB_BAUD = 115200;
 
 #endif //DYNAMBI_GLOBALS_H
