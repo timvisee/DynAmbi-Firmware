@@ -68,6 +68,27 @@ void StripController::animationInit() {
     this->render();
 }
 
+void StripController::animationConnect() {
+    // Store the current time
+    long until = millis() + 700;
+
+    // Play the animation until the specified time
+    while(millis() < until) {
+        // Determine the intensity
+        uint8_t intensity = (uint8_t) map(until - millis(), 0, 700, 0, 127);
+
+        // Configure each LED
+        for(uint8_t i = 0; i < LED_STRIP_LED_COUNT; ++i)
+            this->strip.setPixelColor(i, this->strip.Color(0, intensity, 0));
+
+        // Render
+        this->render();
+    }
+
+    // Wait a little before returning
+    delay(200);
+}
+
 bool StripController::stream() {
     // Loop through all LEDs
     for(uint8_t ledIndex = 0; ledIndex < LED_STRIP_LED_COUNT; ledIndex++) {

@@ -57,6 +57,11 @@ public:
     void animationInit();
 
     /**
+     * Play the connection animation.
+     */
+    void animationConnect();
+
+    /**
      * Stream the LED colors from the Serial bus to the LED strip.
      * The LED strip will automatically render once it's finished streaming data.
      *
