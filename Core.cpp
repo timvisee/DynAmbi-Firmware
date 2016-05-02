@@ -59,21 +59,29 @@ void Core::setup() {
     // Start the data stream
     // TODO: Replace this with proper handshaking!
     Serial.print("ozy");
-}
 
-void Core::loop() {
-    // Wait for the begin bytes
+    // Wait for a connection
     // TODO: Replace this with proper handshaking!
     while(Serial.read() != 'o');
     if(Serial.read() != 'z')
         return;
 
+    // Show the connection animator
+    this->strip.animationConnect();
+}
+
+void Core::loop() {
     // Stream the strip data
     this->strip.stream();
 
     // End
     // TODO: Replace this with proper packet handling
     Serial.write('y');
+
+    // Wait for the begin bytes
+    // TODO: Replace this with proper handshaking!
+    while(Serial.read() != 'o');
+    while(Serial.read() != 'z');
 
     // Update everything
     updateLogic();
