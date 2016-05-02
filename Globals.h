@@ -34,6 +34,22 @@ const bool DEBUG = true;
 
 
 /**
+ * LED strip configuration.
+ */
+
+/**
+ * Number of LEDs on the strip.
+ */
+const uint8_t LED_STRIP_LED_COUNT = 62;
+
+/**
+ * Number of color channels on the LED strip.
+ */
+const uint8_t LED_STRIP_CHANNEL_COUNT = 3;
+
+
+
+/**
  * LED controller configuration.
  */
 
