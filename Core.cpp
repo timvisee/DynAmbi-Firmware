@@ -62,7 +62,8 @@ void Core::setup() {
 
     // Wait for a connection
     // TODO: Replace this with proper handshaking!
-    while(Serial.read() != 'o');
+    while(Serial.read() != 'o')
+        updateLogic();
     if(Serial.read() != 'z')
         return;
 
@@ -80,8 +81,10 @@ void Core::loop() {
 
     // Wait for the begin bytes
     // TODO: Replace this with proper handshaking!
-    while(Serial.read() != 'o');
-    while(Serial.read() != 'z');
+    while(Serial.read() != 'o')
+        updateLogic();
+    while(Serial.read() != 'z')
+        updateLogic();
 
     // Update everything
     updateLogic();
