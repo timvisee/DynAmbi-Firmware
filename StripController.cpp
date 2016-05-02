@@ -22,18 +22,20 @@
 
 #include "StripController.h"
 
+#include "SwiftBoltProtocol.h"
+
 void StripController::init() {
     // Initialize the LED strip
-    this->strip = LPD8806(LED_COUNT, STRIP_PIN_DATA, STRIP_PIN_CLOCK);
+    this->strip = LPD8806(LED_STRIP_LED_COUNT, LED_STRIP_PIN_DATA, LED_STRIP_PIN_CLOCK);
 }
 
 LPD8806 StripController::getStrip() {
     return this->strip;
 }
 
-bool StripController::read() {
+bool StripController::stream() {
     // Loop through all LEDs
-    for(uint8_t ledIndex = 0; ledIndex < LED_STRIP_LED_COUNT; i++) {
+    for(uint8_t ledIndex = 0; ledIndex < LED_STRIP_LED_COUNT; ledIndex++) {
         // Create an array to read the color data into
         uint8_t * colors = new uint8_t[LED_STRIP_CHANNEL_COUNT];
 
@@ -58,7 +60,13 @@ bool StripController::read() {
     }
 
     // Render the LED strip
-    this.render();
+    this->render();
+
+    // Read data until we've reached the stop bit for the stream
+    // TODO: Add timeout
+    while(((uint8_t) Serial.read()) != SwiftBoltProtocol::STREAM_STOP_BYTE);
+
+    // Return
     return true;
 }
 

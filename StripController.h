@@ -51,7 +51,7 @@ public:
      *
      * @return True on success, false on failure.
      */
-    void stream();
+    bool stream();
 
     /**
      * Render the current strip state to the physical LED strip.
