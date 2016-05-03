@@ -24,7 +24,7 @@
 
 // Initializations
 Led LedManager::errorLed = Led(ERROR_LED_PIN, ERROR_LED_ANALOG);
-Led LedManager::statusLed = Led(Led::STATUS_LED_PIN, Led::STATUS_LED_ANALOG);
+Led LedManager::statusLed = Led(STATUS_LED_PIN, STATUS_LED_ANALOG);
 
 void LedManager::setup() {
     // Set up the LEDs

@@ -21,15 +21,12 @@
  ******************************************************************************/
 
 #include "Led.h"
-#include "Globals.h"
 
 const uint8_t Led::BRIGHTNESS_LOW = 0;
 const uint8_t Led::BRIGHTNESS_HIGH = 255;
-const uint8_t Led::STATUS_LED_PIN = 13;
-const bool Led::STATUS_LED_ANALOG = false;
 
 Led::Led() {
-    this->pin = Led::STATUS_LED_PIN;
+    this->pin = STATUS_LED_PIN;
 }
 
 Led::Led(uint8_t pin, bool analogMode) {

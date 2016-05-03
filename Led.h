@@ -24,6 +24,7 @@
 #define DYNAMBI_LED_H
 
 #include <Arduino.h>
+#include "Globals.h"
 
 /**
  * Led class.
@@ -39,18 +40,6 @@ public:
      * Constant for the highest brightness value of the LED.
      */
     static const uint8_t BRIGHTNESS_HIGH;
-
-    /**
-     * Status LED pin.
-     * This is the status LED on the Arduino board itself, usually connected to port 13.
-     */
-    static const uint8_t STATUS_LED_PIN;
-
-    /**
-     * Status LED mode.
-     * Define whether the status LED is in analog or digital mode.
-     */
-    static const bool STATUS_LED_ANALOG;
 
 private:
     /**
