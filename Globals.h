@@ -34,7 +34,18 @@ const bool DEBUG = true;
 
 
 /**
- * LED configurations.
+ * Ethernet configuration.
+ */
+
+/**
+ * Ethernet host name.
+ */
+#define ETHERNET_HOST_NAME "DynAmbi"
+
+
+
+/**
+ * LED configuration.
  */
 
 /**

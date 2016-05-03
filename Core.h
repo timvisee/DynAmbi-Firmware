@@ -29,6 +29,9 @@
 #include "LedManager.h"
 #include "StripController.h"
 
+#include <SPI.h>
+#include <Ethernet.h>
+
 /**
  * Core class.
  */
@@ -55,6 +58,13 @@ public:
      */
     void setup();
 
+private:
+    /**
+     * Set up the ethernet subsystem.
+     */
+    void setupEthernet();
+
+public:
     /**
      * Called each loop.
      */

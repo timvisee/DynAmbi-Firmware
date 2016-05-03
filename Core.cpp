@@ -24,6 +24,13 @@
 #include "Random.h"
 #include "Timer.h"
 
+/**
+ * Ethernet shield MAC address.
+ */
+byte mac[] = {
+        0x90, 0xA2, 0xDA, 0x0D, 0x01, 0x44
+};
+
 Core::Core() {
     // Field initialization
     this->started = false;
@@ -59,6 +66,9 @@ void Core::setup() {
     // Initialize the LED strip
     this->strip.init();
 
+    // Set up the ethernet subsystem
+    setupEthernet();
+
     // The device has been started, update the flag
     this->started = true;
 
@@ -75,6 +85,44 @@ void Core::setup() {
 
     // Show the connection animator
     this->strip.animationConnect();
+}
+
+void Core::setupEthernet() {
+    // Define the preferred DHCP hostname
+    Ethernet.hostName(ETHERNET_HOST_NAME);
+
+    // Start the ethernet connection and request an IP address using DHCP
+    if(Ethernet.begin(mac) == 0) {
+        // Show a status message
+        Serial.println("ERR: Failed to request IP address using DHCP");
+
+        // Enable the error LED
+        LedManager::errorLed.setState(true);
+
+        // Unable to continue, keep looping the logic loop
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
+        while(true)
+            updateLogic();
+#pragma clang diagnostic pop
+    }
+
+    // Print the local IP address
+    Serial.print("IP address: ");
+    for(byte thisByte = 0; thisByte < 4; thisByte++) {
+        // Print the number bit
+        Serial.print(Ethernet.localIP()[thisByte], DEC);
+
+        // Print the separator or new line
+        if(thisByte < 3)
+            Serial.print(".");
+        else
+            Serial.println();
+    }
+
+    // Print the hostname
+    Serial.println("Host name: ");
+    Serial.println(Ethernet.getHostName());
 }
 
 void Core::loop() {

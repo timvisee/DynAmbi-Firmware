@@ -23,6 +23,9 @@
 #include <Arduino.h>
 #include "Core.h"
 
+#include <SPI.h>
+#include <Ethernet.h>
+
 /**
  * Core instance. For all basic logic.
  */
