@@ -37,6 +37,8 @@ void Core::setup() {
     // Show a status message
     Serial.print("Starting ");
     Serial.print(DEVICE_NAME);
+    Serial.print(" v");
+    Serial.print(DEVICE_VERSION_NAME);
     Serial.println("...");
 
     // Randomize the random seed

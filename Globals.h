@@ -35,6 +35,11 @@
 #define DEVICE_NAME "DynAmbi Controller"
 
 /**
+ * Device version.
+ */
+#define DEVICE_VERSION_NAME "0.1"
+
+/**
  * Debug mode.
  * True to enable, false to disable.
  */
