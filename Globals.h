@@ -29,7 +29,7 @@
  * Debug mode.
  * True to enable, false to disable.
  */
-const bool DEBUG = true;
+#define DEBUG true
 
 
 
@@ -84,22 +84,22 @@ const uint8_t ETHERNET_MAC[] = {
 /**
  * Data pin for the LED strip.
  */
-const uint8_t LED_STRIP_PIN_DATA = 2;
+#define LED_STRIP_PIN_DATA 2
 
 /**
  * Clock pin for the LED strip.
  */
-const uint8_t LED_STRIP_PIN_CLOCK = 3;
+#define LED_STRIP_PIN_CLOCK 3
 
 /**
  * Number of LEDs on the strip.
  */
-const uint8_t LED_STRIP_LED_COUNT = 62;
+#define LED_STRIP_LED_COUNT 62
 
 /**
  * Number of color channels on the LED strip.
  */
-const uint8_t LED_STRIP_CHANNEL_COUNT = 3;
+#define LED_STRIP_CHANNEL_COUNT 3
 
 
 
@@ -110,17 +110,17 @@ const uint8_t LED_STRIP_CHANNEL_COUNT = 3;
 /**
  * Defines the minimum brightness of a pulse.
  */
-const uint8_t LEDCONTROLLER_PULSE_BRIGHTNESS_MIN = 30;
+#define LEDCONTROLLER_PULSE_BRIGHTNESS_MIN 30
 
 /**
  * Defines the maximum brightness of a pulse.
  */
-const uint8_t LEDCONTROLLER_PULSE_BRIGHTNESS_MAX = 80;
+#define LEDCONTROLLER_PULSE_BRIGHTNESS_MAX 80
 
 /**
  * Defines the pulse duration.
  */
-const int LEDCONTROLLER_PULSE_DURATION = 750;
+#define LEDCONTROLLER_PULSE_DURATION 750
 
 
 
@@ -131,11 +131,11 @@ const int LEDCONTROLLER_PULSE_DURATION = 750;
 /**
  * Define whether the serial USB connection is enabled.
  */
-const bool SERIAL_USB_ENABLED = true;
+#define SERIAL_USB_ENABLED true
 
 /**
  * The USB serial baud rate.
  */
-const unsigned long SERIAL_USB_BAUD = 115200;
+#define SERIAL_USB_BAUD 115200
 
 #endif //DYNAMBI_GLOBALS_H
