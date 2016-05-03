@@ -43,6 +43,11 @@ public:
     static Led statusLed;
 
     /**
+     * Set up all LEDs.
+     */
+    static void setup();
+
+    /**
      * Update all managed LEDs.
      */
     static void update();

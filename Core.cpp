@@ -49,9 +49,8 @@ void Core::setup() {
     // Randomize the random seed
     Random::randomize();
 
-    // Set up the status LED
-    LedManager::errorLed.setupPin();
-    LedManager::statusLed.setupPin();
+    // Set up the LED manager
+    LedManager::setup();
 
     // Enable pulsing for the status LED
     LedManager::statusLed.setPulsing(true);
