@@ -24,13 +24,6 @@
 #include "Random.h"
 #include "Timer.h"
 
-/**
- * Ethernet shield MAC address.
- */
-byte mac[] = {
-        0x90, 0xA2, 0xDA, 0x0D, 0x01, 0x44
-};
-
 Core::Core() {
     // Field initialization
     this->started = false;
@@ -92,7 +85,7 @@ void Core::setupEthernet() {
     Ethernet.hostName(ETHERNET_HOST_NAME);
 
     // Start the ethernet connection and request an IP address using DHCP
-    if(Ethernet.begin(mac) == 0) {
+    if(Ethernet.begin((uint8_t *) ETHERNET_MAC) == 0) {
         // Show a status message
         Serial.println("ERR: Failed to request IP address using DHCP");
 

@@ -38,6 +38,13 @@ const bool DEBUG = true;
  */
 
 /**
+ * Ethernet shield MAC address.
+ */
+const uint8_t ETHERNET_MAC[] = {
+        0x90, 0xA2, 0xDA, 0x0D, 0x01, 0x44
+};
+
+/**
  * Ethernet host name.
  */
 #define ETHERNET_HOST_NAME "DynAmbi"
