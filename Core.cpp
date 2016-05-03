@@ -118,7 +118,7 @@ void Core::setupEthernet() {
     }
 
     // Print the hostname
-    Serial.println("Host name: ");
+    Serial.print("Host name: ");
     Serial.println(Ethernet.getHostName());
 }
 
