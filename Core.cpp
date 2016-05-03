@@ -37,8 +37,13 @@ void Core::setup() {
     // Enable the serial connection
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCSimplifyInspection"
-    if(SERIAL_USB_ENABLED)
+    if(SERIAL_USB_ENABLED) {
+        // Begin the serial connection
         Serial.begin(SERIAL_USB_BAUD);
+
+        // Wait for the serial connection to become available
+        while(!Serial);
+    }
 #pragma clang diagnostic pop
 
     // Randomize the random seed
