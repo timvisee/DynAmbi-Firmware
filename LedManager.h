@@ -24,6 +24,7 @@
 #define DYNAMBI_LEDMANAGER_H
 
 #include <Arduino.h>
+#include "Globals.h"
 #include "Led.h"
 
 /**
@@ -31,6 +32,11 @@
  */
 class LedManager {
 public:
+    /**
+     * Error LED instance.
+     */
+    static Led errorLed;
+
     /**
      * Status LED instance.
      */

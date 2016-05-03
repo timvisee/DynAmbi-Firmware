@@ -34,6 +34,22 @@ const bool DEBUG = true;
 
 
 /**
+ * LED configurations.
+ */
+
+/**
+ * Error LED pin.
+ */
+#define ERROR_LED_PIN 6
+
+/**
+ * Error LED analog mode.
+ */
+#define ERROR_LED_ANALOG true
+
+
+
+/**
  * LED strip configuration.
  */
 

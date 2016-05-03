@@ -23,9 +23,11 @@
 #include "LedManager.h"
 
 // Initializations
+Led LedManager::errorLed = Led(ERROR_LED_PIN, ERROR_LED_ANALOG);
 Led LedManager::statusLed = Led(Led::STATUS_LED_PIN, Led::STATUS_LED_ANALOG);
 
 void LedManager::update() {
-    // Update the status LED
+    // Update all LEDs
+    LedManager::errorLed.update();
     LedManager::statusLed.update();
 }

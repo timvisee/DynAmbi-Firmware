@@ -50,6 +50,7 @@ void Core::setup() {
     Random::randomize();
 
     // Set up the status LED
+    LedManager::errorLed.setupPin();
     LedManager::statusLed.setupPin();
 
     // Enable pulsing for the status LED
