@@ -26,6 +26,15 @@
 #include <Arduino.h>
 
 /**
+ * General configuration.
+ */
+
+/**
+ * Device name.
+ */
+#define DEVICE_NAME "DynAmbi Controller"
+
+/**
  * Debug mode.
  * True to enable, false to disable.
  */

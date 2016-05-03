@@ -31,11 +31,13 @@ Core::Core() {
 }
 
 void Core::setup() {
-    // Initial startup delay
-    delay(200);
-
     // Set up the serial connection
     setupSerial();
+
+    // Show a status message
+    Serial.print("Starting ");
+    Serial.print(DEVICE_NAME);
+    Serial.println("...");
 
     // Randomize the random seed
     Random::randomize();
