@@ -27,6 +27,10 @@
 
 class SwiftBoltProtocol {
 public:
+
+    /**
+     * Stop byte for a LED strip stream.
+     */
     const static uint8_t BYTE_STREAM_STOP = 130;
 };
 
