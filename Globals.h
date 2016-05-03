@@ -68,12 +68,12 @@ const uint8_t ETHERNET_MAC[] = {
 /**
  * Status LED pin.
  */
-#define STATUS_LED_PIN 13
+#define STATUS_LED_PIN 5
 
 /**
  * Status LED analog mode.
  */
-#define STATUS_LED_ANALOG false
+#define STATUS_LED_ANALOG true
 
 
 
