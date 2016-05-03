@@ -34,17 +34,8 @@ void Core::setup() {
     // Initial startup delay
     delay(200);
 
-    // Enable the serial connection
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCSimplifyInspection"
-    if(SERIAL_USB_ENABLED) {
-        // Begin the serial connection
-        Serial.begin(SERIAL_USB_BAUD);
-
-        // Wait for the serial connection to become available
-        while(!Serial);
-    }
-#pragma clang diagnostic pop
+    // Set up the serial connection
+    setupSerial();
 
     // Randomize the random seed
     Random::randomize();
@@ -77,6 +68,20 @@ void Core::setup() {
 
     // Show the connection animator
     this->strip.animationConnect();
+}
+
+void Core::setupSerial() {
+    // Enable the serial connection
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCSimplifyInspection"
+    if(SERIAL_USB_ENABLED) {
+        // Begin the serial connection
+        Serial.begin(SERIAL_USB_BAUD);
+
+        // Wait for the serial connection to become available
+        while(!Serial);
+    }
+#pragma clang diagnostic pop
 }
 
 void Core::setupEthernet() {

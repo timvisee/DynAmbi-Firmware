@@ -60,6 +60,11 @@ public:
 
 private:
     /**
+     * Set up the serial subsystem.
+     */
+    void setupSerial();
+
+    /**
      * Set up the ethernet subsystem.
      */
     void setupEthernet();
