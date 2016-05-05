@@ -89,6 +89,9 @@ void Core::setupSerial() {
 }
 
 void Core::setupEthernet() {
+    // Show a status message
+    Serial.println("Setting up Ethernet connection...");
+
     // Define the preferred DHCP hostname
     Ethernet.hostName(ETHERNET_HOST_NAME);
 
