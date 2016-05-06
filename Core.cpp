@@ -56,6 +56,9 @@ void Core::setup() {
     // Set up the ethernet subsystem
     setupEthernet();
 
+    // Set up and start the server
+    ServerController::start();
+
     // The device has been started, update the flag
     this->started = true;
 

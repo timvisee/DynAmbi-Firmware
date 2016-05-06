@@ -29,6 +29,8 @@
 #include "LedManager.h"
 #include "StripController.h"
 
+#include "ServerController.h"
+
 #include <SPI.h>
 #include <Ethernet.h>
 
