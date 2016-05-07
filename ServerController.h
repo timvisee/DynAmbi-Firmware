@@ -27,7 +27,7 @@
 #include <Ethernet.h>
 
 class ServerController {
-public:
+private:
     /**
      * Server instance.
      */
@@ -38,6 +38,7 @@ public:
      */
     static bool started;
 
+public:
     /**
      * Get the server instance.
      */
