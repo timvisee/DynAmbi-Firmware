@@ -24,8 +24,32 @@
 
 // Initialize fields
 EthernetServer ServerController::server = NULL;
+bool ServerController::started = false;
+
+EthernetServer ServerController::getServer() {
+    return ServerController::server;
+}
 
 void ServerController::start() {
     // Set up the Ethernet server.
+    // TODO: Use configurable port!
     ServerController::server = EthernetServer(23);
+
+    // Set the started flag
+    ServerController::started = true;
+}
+
+bool ServerController::isStarted() {
+    return ServerController::started;
+}
+
+void ServerController::stop() {
+    // Make sure the server is started
+    if(!ServerController::isStarted())
+        return;
+
+    // TODO: Stop the server!
+
+    // Reset the started flag
+    ServerController::started = false;
 }

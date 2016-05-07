@@ -34,9 +34,30 @@ public:
     static EthernetServer server;
 
     /**
+     * Flag to define whether the server is started.
+     */
+    static bool started;
+
+    /**
+     * Get the server instance.
+     */
+    static EthernetServer getServer();
+
+    /**
      * Start and set up the server.
+     * This method call will be ignored if the server is started already.
      */
     static void start();
+
+    /**
+     * Check whether the server is started.
+     */
+    static bool isStarted();
+
+    /**
+     * Stop the server if it's currently running.
+     */
+    static void stop();
 };
 
 #endif //DYNAMBI_CONNECTIONMANAGER_H
