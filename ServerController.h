@@ -38,6 +38,16 @@ private:
      */
     static bool started;
 
+    /**
+     * A connected ethernet client.
+     */
+    static EthernetClient client;
+
+    /**
+     * Flag to define whether a client is connected or not.
+     */
+    static bool clientConnected;
+
 public:
     /**
      * Get the server instance.
@@ -59,6 +69,21 @@ public:
      * Stop the server if it's currently running.
      */
     static void stop();
+
+    /**
+     * Update the connection status.
+     */
+    static void update();
+
+    /**
+     * Get the connected client.
+     */
+    static EthernetClient getClient();
+
+    /**
+     * Check whether a client is connected.
+     */
+    static bool isClientConnected();
 };
 
 #endif //DYNAMBI_CONNECTIONMANAGER_H

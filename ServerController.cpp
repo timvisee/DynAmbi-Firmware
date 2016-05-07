@@ -25,6 +25,8 @@
 // Initialize fields
 EthernetServer ServerController::server = NULL;
 bool ServerController::started = false;
+EthernetClient ServerController::client = NULL;
+bool ServerController::clientConnected = false;
 
 EthernetServer ServerController::getServer() {
     return ServerController::server;
@@ -48,8 +50,63 @@ void ServerController::stop() {
     if(!ServerController::isStarted())
         return;
 
-    // TODO: Stop the server!
+    // Delete the server instance, and reset it afterwards
+    // TODO: Check this statement!
+    delete &ServerController::server;
+    ServerController::server = NULL;
 
     // Reset the started flag
     ServerController::started = false;
+}
+
+void ServerController::update() {
+    // Disconnect from the client if the connection dropped
+    if(ServerController::clientConnected && !ServerController::client.connected()) {
+        Serial.println("DISCONNECTING");
+        // Stop the connection
+        ServerController::client.stop();
+
+        // Reset the connection
+        ServerController::client = NULL;
+        ServerController::clientConnected = false;
+
+        // Show a status message
+        Serial.println("Client disconnected.");
+    }
+
+    // Check if a new client is available if none is connected
+    if(!ServerController::isClientConnected()) {
+        // TODO: Check if a client is available!
+
+        // Get the current available client status
+        ServerController::client = ServerController::server.available();
+
+        // Do not connect if this isn't a valid client
+        if(!ServerController::client || !ServerController::client.connected()) {
+            // Reset the client and return
+            ServerController::client = NULL;
+            return;
+        }
+
+        // Set the client's connection status
+        ServerController::clientConnected = true;
+
+        // Clear the input buffer before we're starting
+        //ServerController::client.flush();
+
+        // Set the connection timeout
+        // TODO: Make timeout configurable!
+        ServerController::client.setTimeout(5000);
+
+        // Show a status message
+        Serial.println("Client connected.");
+    }
+}
+
+EthernetClient ServerController::getClient() {
+    return ServerController::client;
+}
+
+bool ServerController::isClientConnected() {
+    return ServerController::clientConnected && ServerController::client.connected();
 }
