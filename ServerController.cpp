@@ -108,5 +108,5 @@ EthernetClient ServerController::getClient() {
 }
 
 bool ServerController::isClientConnected() {
-    return ServerController::clientConnected && ServerController::client.connected();
+    return !ServerController::clientConnected && (bool) ServerController::client.connected();
 }
