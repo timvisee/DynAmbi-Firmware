@@ -67,6 +67,13 @@ void Core::setup() {
         updateLogic();
     while(!ServerController::isClientConnected());
 
+    // Wait for a connection
+    // TODO: Replace this with proper handshaking!
+    while(!ServerController::getClient().available() || ServerController::getClient().read() != 'o')
+        updateLogic();
+    while(!ServerController::getClient().available() || ServerController::getClient().read() != 'z')
+        updateLogic();
+
     // Show the connection animator
     this->strip.animationConnect();
 }
