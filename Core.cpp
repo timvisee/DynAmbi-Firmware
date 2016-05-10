@@ -62,48 +62,10 @@ void Core::setup() {
     // The device has been started, update the flag
     this->started = true;
 
-    // TODO: This start is already done in the server controller!
-//    EthernetServer server(23);
-//    bool alreadyConnected = false;
-//
-//    while(true) {
-//        // wait for a new client:
-//        EthernetClient client = server.available();
-//
-//        // when the client sends the first byte, say hello:
-//        if (client) {
-//            if (!alreadyConnected) {
-//                // clead out the input buffer:
-//                client.flush();
-//                Serial.println("We have a new client");
-//                client.println("Hello, client!");
-//                alreadyConnected = true;
-//            }
-//
-//            if (client.available() > 0) {
-//                // read the bytes incoming from the client:
-//                char thisChar = client.read();
-//                // echo the bytes back to the client:
-//                server.write(thisChar);
-//                // echo the bytes to the server as well:
-//                Serial.write(thisChar);
-//            }
-//        }
-//
-//        if(random(0, 1) == -1)
-//            break;
-//    }
-
-    // Start the data stream
-    // TODO: Replace this with proper handshaking!
-    //Serial.print("ozy");
-
-//    // Wait for a connection
-//    // TODO: Replace this with proper handshaking!
-//    while(Serial.read() != 'o')
-//        updateLogic();
-//    if(Serial.read() != 'z')
-//        return;
+    // Wait for a client to connect
+    do
+        updateLogic();
+    while(!ServerController::isClientConnected());
 
     // Show the connection animator
     this->strip.animationConnect();
@@ -168,19 +130,23 @@ void Core::loop() {
     // Update the server controller
     ServerController::update();
 
-//    // Stream the strip data
-//    this->strip.stream();
-//
-//    // End
-//    // TODO: Replace this with proper packet handling
-//    Serial.write('y');
-//
-//    // Wait for the begin bytes
-//    // TODO: Replace this with proper handshaking!
-//    while(Serial.read() != 'o')
-//        updateLogic();
-//    while(Serial.read() != 'z')
-//        updateLogic();
+    // Stream the strip data if we're connected
+    if(ServerController::isClientConnected()) {
+        // Stream the strip data
+        this->strip.stream();
+
+        // End
+        // TODO: Replace this with proper packet handling
+        ServerController::getClient().write('y');
+        Serial.write('y');
+
+        // Wait for the begin bytes
+        // TODO: Replace this with proper handshaking!
+        while(!ServerController::getClient().available() || ServerController::getClient() != 'o')
+            updateLogic();
+        while(!ServerController::getClient().available() || ServerController::getClient() != 'z')
+            updateLogic();
+    }
 
     // Update everything
     updateLogic();
@@ -189,6 +155,9 @@ void Core::loop() {
 void Core::updateLogic() {
     // Update the LED manager
     LedManager::update();
+
+    // Update the server controller status
+    ServerController::update();
 }
 
 void Core::smartDelay(int delay) {
