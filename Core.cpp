@@ -130,6 +130,19 @@ void Core::loop() {
     // Update the server controller
     ServerController::update();
 
+    // Check whether a client is connected
+    if(ServerController::isClientConnected()) {
+        // TODO: Debug message
+        Serial.println("CONNECTED! ");
+
+        // Read incoming data once available
+        if(ServerController::getClient().available()) {
+            // Print the incomming data
+            Serial.print("GOT: ");
+            Serial.println(ServerController::getClient().read());
+        }
+    }
+
     // Stream the strip data if we're connected
     if(ServerController::isClientConnected()) {
         // Stream the strip data
