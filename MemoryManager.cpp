@@ -9,8 +9,7 @@
 #include "MemoryManager.h"
 
 // Static field initialization
-// TODO: Make timing configurable!
-Timer MemoryManager::memoryTimer = Timer(5000, true);
+Timer MemoryManager::memoryTimer = Timer(MEMORY_REPORT_INTERVAL, true);
 
 void MemoryManager::reportMemory() {
 // Only include the memory reporting code when debug mode is enabled
@@ -20,7 +19,7 @@ void MemoryManager::reportMemory() {
     int memFree = freeMemory();
 
     // Report the number of available memory
-    Serial.println("M> " + String(memFree) + " b free");
+    Serial.println("M> " + String(memFree) + " bytes free");
 
 #endif
 }

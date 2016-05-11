@@ -45,6 +45,11 @@
  */
 #define DEBUG true
 
+/**
+ * Memory report interval in milliseconds.
+ */
+#define MEMORY_REPORT_INTERVAL 5000
+
 
 
 /**
