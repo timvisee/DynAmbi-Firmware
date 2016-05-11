@@ -31,6 +31,8 @@
 
 #include "ServerController.h"
 
+#include "MemoryManager.h"
+
 #include <SPI.h>
 #include <Ethernet.h>
 

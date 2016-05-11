@@ -173,6 +173,9 @@ void Core::loop() {
 }
 
 void Core::updateLogic() {
+    // Update the memory manager
+    MemoryManager::update();
+
     // Update the LED manager
     LedManager::update();
 
