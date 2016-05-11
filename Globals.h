@@ -39,11 +39,23 @@
  */
 #define DEVICE_VERSION_NAME "0.1"
 
+
+
+/**
+ * Debug configuration.
+ */
+
 /**
  * Debug mode.
  * True to enable, false to disable.
  */
 #define DEBUG true
+
+/**
+ * Memory report enabled.
+ * True to enable, false to disable.
+ */
+#define MEMORY_REPORT_ENABLED DEBUG
 
 /**
  * Memory report interval in milliseconds.

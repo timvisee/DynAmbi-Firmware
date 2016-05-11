@@ -12,8 +12,8 @@
 Timer MemoryManager::memoryTimer = Timer(MEMORY_REPORT_INTERVAL, true);
 
 void MemoryManager::reportMemory() {
-// Only include the memory reporting code when debug mode is enabled
-#if DEBUG
+// Only include the memory report code if it's explicitly enabled
+#if MEMORY_REPORT_ENABLED
 
     // Get the current memory available (bytes)
     int memFree = freeMemory();
@@ -25,8 +25,8 @@ void MemoryManager::reportMemory() {
 }
 
 void MemoryManager::update() {
-// Only include the memory reporting code when debug mode is enabled
-#if DEBUG
+// Only include the memory report code if it's explicitly enabled
+#if MEMORY_REPORT_ENABLED
 
     // Make sure the timer is finished
     if(!MemoryManager::memoryTimer.isFinished())
